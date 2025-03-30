@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quack Anime</title>
+    <link rel="icon" type="image/x-icon" href="Icon.png">
+    <meta name="description" content="Watch One Punch Man episodes online with a sleek, user-friendly interface.">
+    <style>
+        :root {
+            --bg-color: rgb(34, 34, 34);
+            --box-color: rgb(56, 56, 56);
+            --text-color: aliceblue;
+            --button-bg: rgb(255, 208, 0);
+            --button-disabled: rgb(100, 100, 100);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        header, footer {
+            background-color: var(--box-color);
+            padding: 10px;
+        }
+
+        header a img:hover {
+            transform: scale(1.1);
+        }
+
+        .Box {
+            border-radius: 10px;
+            background: var(--box-color);
+            margin: 10px auto;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        iframe {
+            width: 100%;
+            max-width: 720px;
+            height: 480px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .nav-buttons button {
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        .nav-buttons button:disabled {
+            background-color: var(--button-disabled);
+            cursor: not-allowed;
+        }
+
+        .theme-toggle {
+            margin: 10px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: var(--button-bg);
+            color: white;
+        }
+
+        div img {
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="Homepage.html"><img src="Banner2.1.png" style="width: 110px; height: 70px;" alt="Quack Anime Logo"></a>
+    </header>
+    <div class="Box">
+        <img src="https://i.pinimg.com/originals/15/f7/51/15f751c21abe543475e770664ddea8fe.png" alt="">
+        <select id="episodePicker" onchange="changeEpisode(this.value)"></select><br>
+        <iframe id="episodeFrame" src="https://drive.google.com/file/d/14SRzKmZoK6rFvAymYp77-xnP2xKNnu02/preview" allow="autoplay" allowfullscreen></iframe>
+        <div class="nav-buttons">
+            <button id="prevBtn" onclick="changeEpisode(currentEpisode - 1)" aria-label="Previous Episode">⏪ Previous</button>
+            <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+            <button id="nextBtn" onclick="changeEpisode(currentEpisode + 1)" aria-label="Next Episode">Next ⏩</button>
+        </div>
+    </div>
+    <footer>
+        <h4>By Martinez Renz</h4>
+        <img src="Banner2.1.png" style="width: 110px; height: 70px;" alt="Quack Anime Logo">
+    </footer>
+    <script>
+        const Episode_Array = [
+            "https://drive.google.com/file/d/14SRzKmZoK6rFvAymYp77-xnP2xKNnu02/preview",
+            "https://drive.google.com/file/d/1VmTBKPoOsarN5DG6w9LmM2MU23yEWc55/preview",
+            "https://drive.google.com/file/d/1mpxR6GsgC1gHcB_fLGGgV-yINZKpOvaC/preview",
+            "https://drive.google.com/file/d/1XexHMLTXOoxOyPiUYXB4QYcEIY6Lqke5/preview",
+            "https://drive.google.com/file/d/1NJyYog45TAMlpLFLX7iIvRsiw3lGazvR/preview",
+            "https://drive.google.com/file/d/1yiZuJgLaeiT16nEWaTSUGH0U5E-stcRM/preview",
+            "https://drive.google.com/file/d/10A3723m3sdtPebsNpiw-PIrZCKuK-d8i/preview",
+            "https://drive.google.com/file/d/1ONi4w_88OGXI5YlKB4kiByEHmpDj7SiL/preview",
+            "https://drive.google.com/file/d/1Cu2_j0Gr-b-0hajQCCRU8uQ0cFOAgwtQ/preview",
+            "https://drive.google.com/file/d/1NZlwn2GEC--xtedmxM157vBCPTBqmh2y/preview",
+            "https://drive.google.com/file/d/17INZy-l0CSPug2qM3lNrL8koqoLa7kqM/preview",
+            "https://drive.google.com/file/d/11949phzG2mTsbPe0RDVEfSlpwfpgfWWK/preview",
+        ];
+
+        let currentEpisode = 0;
+
+        function changeEpisode(index) {
+            index = parseInt(index);
+            if (index >= 0 && index < Episode_Array.length) {
+                document.getElementById("episodeFrame").src = Episode_Array[index];
+                currentEpisode = index;
+                updateUI();
+            }
+        }
+
+        function updateUI() {
+            document.getElementById("episodePicker").value = currentEpisode;
+            document.getElementById("prevBtn").disabled = currentEpisode === 0;
+            document.getElementById("nextBtn").disabled = currentEpisode === Episode_Array.length - 1;
+        }
+
+        function toggleTheme() {
+          const root = document.documentElement;
+          const isDarkMode = root.style.getPropertyValue('--bg-color') === 'rgb(34, 34, 34)';
+
+    if (isDarkMode) {
+        root.style.setProperty('--bg-color', 'rgb(240, 240, 240)');
+        root.style.setProperty('--box-color', 'rgb(220, 220, 220)');
+        root.style.setProperty('--text-color', 'black');
+    } else {
+        root.style.setProperty('--bg-color', 'rgb(34, 34, 34)');
+        root.style.setProperty('--box-color', 'rgb(56, 56, 56)');
+        root.style.setProperty('--text-color', 'aliceblue');
+    }
+}
+
+
+        function populateEpisodePicker() {
+            const picker = document.getElementById("episodePicker");
+            Episode_Array.forEach((_, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                option.textContent = `Episode ${index + 1}`;
+                picker.appendChild(option);
+            });
+        }
+
+        populateEpisodePicker();
+        updateUI();
+    </script>
+</body>
+</html>

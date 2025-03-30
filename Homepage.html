@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quack Anime</title>
+    <link rel="icon" type="image/x-icon" href="Icon.png">
+    <style>
+        body {
+            background-color: rgb(34, 34, 34);
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header, footer {
+            background-color: rgb(56, 56, 56);
+            text-align: center;
+            padding: 10px;
+        }
+
+        .search-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .search-container input {
+            width: 60%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        .Box {
+            border-radius: 5px;
+            background: rgb(56, 56, 56);
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgb(37, 37, 37);
+            max-width: 80%;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 10px;
+            white-space: nowrap;
+        }
+
+        .Placeholder {
+            background-color: rgb(53, 53, 53);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .Placeholder img {
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .Placeholder img:hover {
+            transform: scale(1.1);
+        }
+
+        h5 {
+            color: gray;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        h4 {
+            color: aliceblue;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="Banner2.1.png" style="width: 110px; height: 70px;"> 
+    </header>
+    
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search anime..." onkeyup="searchAnime()">
+    </div>
+
+    <div class="Box">
+        <h5>Anime List</h5>
+        <div class="slider" id="animeList">
+            <div class="Placeholder">
+                <a href="Video.html">
+                    <img src="https://img.flawlessfiles.com/_r/300x400/100/f5/d1/f5d173f8317f592c6c70d594829b89e4/f5d173f8317f592c6c70d594829b89e4.jpg" alt="One Punch man">
+                </a>
+                <h4>One Punch man</h4>
+            </div>
+            <div class="Placeholder">
+                <a href="Onepiece.html">
+                    <img src="https://cdn.noitatnemucod.net/thumbnail/300x400/100/bcd84731a3eda4f4a306250769675065.jpg" alt="One Piece">
+                </a>
+                <h4>One Piece</h4>
+            </div>
+        </div>
+        <h5>Coming Soon to this website</h5>
+        <div class="slider" id="comingSoon">
+            <div class="Placeholder">
+                <a href="DBD.html">
+                    <img src="https://img.flawlessfiles.com/_r/300x400/100/2c/be/2cbe94bcbf18f0f3c205325d4e234d16/2cbe94bcbf18f0f3c205325d4e234d16.jpg" alt="Dragon Ball Daima">
+                </a>
+                <h4>Dragon Ball Daima</h4>
+            </div>
+            <div class="Placeholder">
+                <a href="Dandadan.html">
+                    <img src="https://img.flawlessfiles.com/_r/300x400/100/a8/b5/a8b56a7589ff9edb6c86977c31e27a06/a8b56a7589ff9edb6c86977c31e27a06.jpg" alt="Dandadan">
+                </a>
+                <h4>Dandadan</h4>
+            </div>
+            <div class="Placeholder">
+                <a href="Naruto.html">
+                    <img src="https://img.flawlessfiles.com/_r/300x400/100/9c/bc/9cbcf87f54194742e7686119089478f8/9cbcf87f54194742e7686119089478f8.jpg" alt="Naruto Shippuden">
+                </a>
+                <h4>Naruto Shippuden</h4>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <h4>By Martinez Renz</h4>
+        <img src="Banner2.1.png" style="width: 110px; height: 70px;">
+    </footer>
+
+    <script>
+        function searchAnime() {
+            let input = document.getElementById('searchBar').value.toLowerCase();
+            let placeholders = document.querySelectorAll('.Placeholder');
+            
+            placeholders.forEach(placeholder => {
+                let title = placeholder.querySelector('h4').innerText.toLowerCase();
+                if (title.includes(input)) {
+                    placeholder.style.display = "block";
+                } else {
+                    placeholder.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
